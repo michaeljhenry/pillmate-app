@@ -22,7 +22,7 @@ export class TimeForm extends React.Component {
     onSubmit = (e) => {
         e.preventDefault();
         if(!this.state.dispenseDay || !this.state.hourOne || !this.state.minuteOne || !this.state.secondOne || !this.state.hourTwo || !this.state.minuteTwo || !this.state.secondTwo) {
-                this.setState(() => ({error: 'Please provide a description and amount'
+                this.setState(() => ({error: 'Please provide a value for all the fields'
             }))
         } else {
             this.props.onSubmit(this.state);
