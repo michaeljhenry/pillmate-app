@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { render } from 'enzyme';
 import TimeForm from './TimeForm';
-import {addTime} from '../actions/times';
+import {startAddTime} from '../actions/times';
+import {startAddDay} from '../actions/days';
 
 
 class AddTimePage extends React.Component  {
     onSubmit = (time) => {
-        this.props.addTime(time);
+        this.props.startAddTime(time);
+        this.props.startAddDay(time);
         this.props.history.push('/dashboard');
     }
     render() {
@@ -22,7 +24,8 @@ class AddTimePage extends React.Component  {
 const mapDispatchToProps = (dispatch) => {
     
     return{
-        addTime: (time) => dispatch(addTime(time))
+        startAddTime: (time) => dispatch(startAddTime(time)),
+        startAddDay: (day) => dispatch(startAddDay(day))
     }
 };
 

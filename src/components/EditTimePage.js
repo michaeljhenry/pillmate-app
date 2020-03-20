@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import TimeForm from './TimeForm';
-import {editTime} from '../actions/times';
+import {startEditTime} from '../actions/times';
 
 
 export class EditTimePage extends React.Component {
     onSubmit = (time) => {
         // console.log('time is: ', time);
         // console.log('time id is: ', time.id);
-        this.props.editTime(time.id, time);
+        this.props.startEditTime(time.id, time);
         this.props.history.push('/dashboard');
     }
     render() {
@@ -31,8 +31,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        editTime: (id, time) => dispatch(editTime(id, time))
+        startEditTime: (id, time) => dispatch(startEditTime(id, time))
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(EditTimePage)

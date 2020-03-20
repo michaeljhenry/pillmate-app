@@ -21,6 +21,8 @@ export default  (state = timesReducerDefaultState, action) => {
                     return time;
                 }
             });
+            case 'SET_TIMES':
+                return action.times
         default: return state;
     }
 }

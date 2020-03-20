@@ -1,7 +1,8 @@
 import React from 'react';
-import uuid from 'uuid'
+import uuid from 'uuid';
+import {connect} from 'react-redux';
 
-export default class TimeForm extends React.Component {
+export class TimeForm extends React.Component {
     constructor(props) {
         let num = 0;
         super(props);
@@ -9,21 +10,29 @@ export default class TimeForm extends React.Component {
         this.state = {
             id: props.time ? props.time.id : null,
             dispenseDay: props.time ? props.time.dispenseDay : '',
-            hourOne: props.time ? props.time.hourOne : '',
-            minuteOne: props.time ? props.time.minuteOne : '',
-            secondOne: props.time ? props.time.secondOne : '',
-            hourTwo: props.time ? props.time.hourTwo : '',
-            minuteTwo: props.time ? props.time.minuteTwo : '',
-            secondTwo: props.time ? props.time.secondTwo : '',
+            hourOne: props.time ? props.time.hourOne : null,
+            minuteOne: props.time ? props.time.minuteOne : null,
+            secondOne: props.time ? props.time.secondOne : null,
+            hourTwo: props.time ? props.time.hourTwo : null,
+            minuteTwo: props.time ? props.time.minuteTwo : null,
+            secondTwo: props.time ? props.time.secondTwo : null,
+            errorState: ''
         };
     };
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.onSubmit(this.state);
+        if(!this.state.dispenseDay || !this.state.hourOne || !this.state.minuteOne || !this.state.secondOne || !this.state.hourTwo || !this.state.minuteTwo || !this.state.secondTwo) {
+                this.setState(() => ({error: 'Please provide a description and amount'
+            }))
+        } else {
+            this.props.onSubmit(this.state);
+        }
+        
     }
     onDispenseDayChange = (e) => {
         const dispenseDay = e.target.value;
         this.setState(() => ({dispenseDay}))
+        
     }
     onHourOneChange = (e) => {
         const hourOne = e.target.value;
@@ -54,15 +63,16 @@ export default class TimeForm extends React.Component {
             <div>
             Add Times
                 <form onSubmit = {this.onSubmit}>
-                <select onChange = {this.onDispenseDayChange} className = 'dispenseDay'size="1">
+                {this.state.error && <p className = 'form__error'>{this.state.error}</p>}
+                <select disabled = {this.props.time ? true : false} onChange = {this.onDispenseDayChange} className = 'dispenseDay'size="1">
                     <option value = {this.state.dispenseDay === '' ? '' : this.state.dispenseDay}>{this.state.dispenseDay === '' ? '' : this.state.dispenseDay}</option>
-                    <option value = 'Sunday'>Sun</option>
-                    <option value = 'Monday'>Mon</option>
-                    <option value = 'Tuesday'>Tues</option>
-                    <option value = 'Wednesday'>Wed</option>
-                    <option value = 'Thursday'>Thurs</option>
-                    <option value = 'Friday'>Fri</option>
-                    <option value = 'Sat'>Sat</option>
+                    <option disabled = {this.props.daysTaken.findIndex((element) => 'Sunday' === element) !== -1 ? true : false } value = 'Sunday'>Sun</option>
+                    <option disabled =  {this.props.daysTaken.findIndex((element) => 'Monday' === element) !== -1 ? true : false } value = 'Monday'>Mon</option>
+                    <option disabled =  {this.props.daysTaken.findIndex((element) => 'Tuesday' === element) !== -1 ? true : false } value = 'Tuesday'>Tues</option>
+                    <option disabled =  {this.props.daysTaken.findIndex((element) => 'Wednesday' === element) !== -1 ? true : false } value = 'Wednesday'>Wed</option>
+                    <option disabled =  {this.props.daysTaken.findIndex((element) => 'Thursday' === element) !== -1 ? true : false } value = 'Thursday'>Thurs</option>
+                    <option disabled =  {this.props.daysTaken.findIndex((element) => 'Friday' === element) !== -1 ? true : false } value = 'Friday'>Fri</option>
+                    <option disabled =  {this.props.daysTaken.findIndex((element) => 'Saturday' === element) !== -1 ? true : false } value = 'Saturday'>Sat</option>
                 </select>
                   <select onChange = {this.onHourOneChange} className = 'hourOne'size="1">
                     <option value = ''></option>
@@ -382,3 +392,12 @@ export default class TimeForm extends React.Component {
     }
     
 };
+
+const mapPropsToState = (state) => {
+    console.log(state.times);
+    return {
+        daysTaken: state.days
+    }
+}
+
+export default connect(mapPropsToState)(TimeForm);
