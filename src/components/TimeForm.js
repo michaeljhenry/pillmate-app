@@ -394,7 +394,7 @@ export class TimeForm extends React.Component {
 };
 
 const mapPropsToState = (state) => {
-    console.log(state.times);
+    console.log('This is the state: ', state);
     return {
         daysTaken: state.days
     }

@@ -31,7 +31,7 @@ export const startSetDays = () => {
         .then((snapshot) => {
             let daysArray = [];
             snapshot.forEach((childSnapshot) => {
-                daysArray.push(...childSnapshot.val());
+                daysArray.push(childSnapshot.val());
             })
             dispatch(setDays(daysArray));
         });
