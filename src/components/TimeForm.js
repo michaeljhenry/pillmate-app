@@ -60,11 +60,10 @@ export class TimeForm extends React.Component {
     }
     render() {
         return(
-            <div>
-            Add Times
+            <div className = 'time-content-container'>
                 <form onSubmit = {this.onSubmit}>
                 {this.state.error && <p className = 'form__error'>{this.state.error}</p>}
-                <select disabled = {this.props.time ? true : false} onChange = {this.onDispenseDayChange} className = 'dispenseDay'size="1">
+                Day of the Week: <select disabled = {this.props.time ? true : false} onChange = {this.onDispenseDayChange} className = 'dispenseDay'size="1">
                     <option value = {this.state.dispenseDay === '' ? '' : this.state.dispenseDay}>{this.state.dispenseDay === '' ? '' : this.state.dispenseDay}</option>
                     <option disabled = {this.props.daysTaken.findIndex((element) => 'Sunday' === element) !== -1 ? true : false } value = 'Sunday'>Sun</option>
                     <option disabled =  {this.props.daysTaken.findIndex((element) => 'Monday' === element) !== -1 ? true : false } value = 'Monday'>Mon</option>
@@ -74,7 +73,13 @@ export class TimeForm extends React.Component {
                     <option disabled =  {this.props.daysTaken.findIndex((element) => 'Friday' === element) !== -1 ? true : false } value = 'Friday'>Fri</option>
                     <option disabled =  {this.props.daysTaken.findIndex((element) => 'Saturday' === element) !== -1 ? true : false } value = 'Saturday'>Sat</option>
                 </select>
-                  <select onChange = {this.onHourOneChange} className = 'hourOne'size="1">
+                <div className = 'input-labels'>
+                    <span>Hour One</span>
+                    <span>Min One</span>
+                    <span>Sec One</span>
+                </div>
+                <div className = 'group-input'>
+                <select onChange = {this.onHourOneChange} className = 'select-time hourOne'size="1">
                     <option value = ''></option>
                     <option value = '00'>00</option>
                     <option value = '01'>01</option>
@@ -229,6 +234,13 @@ export class TimeForm extends React.Component {
                 <option value = '59'>59</option>
                 <option value = '60'>60</option>
           </select>
+          </div>
+          <div className = 'input-labels'>
+                <span>Hour Two</span>
+                <span>Min Two</span>
+                <span>Sec Two</span>
+        </div>
+        <div className = 'group-input'>
           <select onChange = {this.onHourTwoChange} className = 'hourTwo' size="1">
           <option value = ''></option>
             <option value = '00'>00</option>
@@ -256,7 +268,7 @@ export class TimeForm extends React.Component {
             <option value = '22'>22</option>
             <option value = '23'>23</option>
         </select>
-        <select onChange = {this.onMinuteTwoChange} className = 'minuteTwo' size="1">
+       <select onChange = {this.onMinuteTwoChange} className = 'minuteTwo' size="1">
         <option value = {''}></option>
             <option value = '00'>00</option>
             <option value = '01'>01</option>
@@ -384,7 +396,8 @@ export class TimeForm extends React.Component {
         <option value = '59'>59</option>
         <option value = '60'>60</option>
 </select>
-          <button>Submit</button>
+</div>
+          <button className = 'button'>Submit</button>
           </form>
         </div>
 

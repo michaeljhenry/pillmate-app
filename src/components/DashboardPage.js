@@ -13,8 +13,9 @@ const DashboardPage = () => {
 
   return(
     <div>
-        Dashboard page content
-        <Link className = 'button' to='/create'>Add Time</Link>
+        <div className = 'content-container'>
+          <Link className = 'button' to='/create'>Add Time</Link>
+        </div>
         <TimesList/>
     </div>
   )

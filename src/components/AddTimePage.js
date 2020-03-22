@@ -15,7 +15,14 @@ class AddTimePage extends React.Component  {
     render() {
         return(
             <div>
+            <div className = 'page-header'>
+            <div className = 'content-container'>
+              <h1 className = 'page-header__title'>Add Time</h1>
+            </div>
+          </div>
+          <div className = 'content-container'>
                 <TimeForm onSubmit = {this.onSubmit}/>
+            </div>
             </div>
         )
     }

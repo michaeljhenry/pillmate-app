@@ -19,3 +19,15 @@
     
 
 }
+
+
+.input-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $l-size;
+}
+
+.group-input {
+    display: flex;
+    justify-content: space-between;
+}

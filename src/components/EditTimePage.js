@@ -13,9 +13,16 @@ export class EditTimePage extends React.Component {
     }
     render() {
         return(
-            <div>
+        <div>
+            <div className = 'page-header'>
+            <div className = 'content-container'>
+              <h1 className = 'page-header__title'>Edit Time</h1>
+            </div>
+          </div>
+          <div className = 'content-container'>
                 <TimeForm onSubmit = {this.onSubmit} time = {this.props.time}/>
             </div>
+        </div>
         )
     }
 };

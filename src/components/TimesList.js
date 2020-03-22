@@ -4,18 +4,25 @@ import TimeListItem from '../components/TimeListItem';
 
 
 export const TimesList = (props) => (
-    <div>
-        {
-            props.times.length === 0 ? (
-                <div>
-                No Expenses
-                </div>
-            ) : (
-                props.times.map((time) => {
-                return <TimeListItem key = {time.id} {...time}/>
-                })
-            )
-    }
+    <div className = 'content-container'>
+    <div className = 'list-header'>
+        <div className = 'show-for-desktop'>Day</div>
+        <div className = 'show-for-desktop'>Time One</div>
+        <div className = 'show-for-desktop'>Time Two</div>
+    </div>
+        <div className = 'list-body'>
+            {
+                props.times.length === 0 ? (
+                    <div>
+                    No Times
+                    </div>
+                ) : (
+                    props.times.map((time) => {
+                    return <TimeListItem key = {time.id} {...time}/>
+                    })
+                )
+        }
+        </div>
     </div>
 );
 
